@@ -8,8 +8,27 @@ from termcolor import colored
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def level_select():
+    levels = ["EASY","MEDIUM","HARD","DEMO"]
+    for i,level in enumerate(levels):
+        print("{}  {}".format(i +1, level))
+    diff = input("Choose a number for difficulty: ")
+    if diff not in ["1","2","3","4"]:
+        level_select()
+    elif diff == "1":
+        diff = 30
+    elif diff == "2":
+        diff = 40
+    elif diff == "3":
+        diff = 60
+    elif diff == "4":
+        diff = 1
+    create_board(diff)
 
-def create_board():
+
+
+
+def create_board(diff):
     row1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     shuffle(row1)                   # shuffles the first row witch gives the whole game palette
@@ -45,7 +64,7 @@ def create_board():
         return num1, num2
     
     i = 0
-    while 20 > i:
+    while diff > i:
         num1,num2 = randnum()
         if board[num1][num2] == 0:
             num1,num2 = randnum()
@@ -185,4 +204,4 @@ def invalid_input(board, fix_ind):
 
 
 clear()
-create_board()
+level_select()
